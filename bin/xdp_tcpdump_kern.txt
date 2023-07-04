@@ -1,0 +1,14 @@
+{
+    "ldxw": 2,
+    "jge": 1,
+    "mov": 4,
+    "stxh": 2,
+    "sub": 1,
+    "lsh": 1,
+    "lddw": 3,
+    "and": 1,
+    "or": 1,
+    "add": 1,
+    "call": 1,
+    "exit": 1
+}

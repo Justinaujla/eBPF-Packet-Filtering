@@ -1,0 +1,21 @@
+{
+    "call": 7,
+    "stxw": 3,
+    "mov": 28,
+    "add": 5,
+    "lddw": 5,
+    "jeq": 4,
+    "stxdw": 1,
+    "exit": 2,
+    "ldxdw": 1,
+    "sub": 1,
+    "rsh": 19,
+    "jgt": 9,
+    "lsh": 16,
+    "or": 8,
+    "and": 2,
+    "ja": 1,
+    "ldxw": 1,
+    "mul": 1,
+    "atomic": 1
+}

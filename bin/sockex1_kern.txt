@@ -1,0 +1,13 @@
+{
+    "mov": 3,
+    "ldabsb": 1,
+    "stxw": 1,
+    "ldxw": 2,
+    "jne": 1,
+    "add": 1,
+    "lddw": 1,
+    "call": 1,
+    "jeq": 1,
+    "atomic": 1,
+    "exit": 1
+}

@@ -1,0 +1,18 @@
+{
+    "mov": 37,
+    "ldxdw": 3,
+    "add": 13,
+    "call": 17,
+    "lddw": 11,
+    "stxw": 7,
+    "exit": 2,
+    "ldxw": 7,
+    "stxdw": 7,
+    "jeq": 3,
+    "sub": 1,
+    "jgt": 1,
+    "lsh": 2,
+    "or": 2,
+    "jne": 1,
+    "div": 1
+}

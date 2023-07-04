@@ -1,0 +1,23 @@
+{
+    "mov": 62,
+    "ldabsh": 2,
+    "jne": 10,
+    "add": 37,
+    "ldindh": 7,
+    "jeq": 13,
+    "ja": 7,
+    "ldindb": 5,
+    "ldindw": 15,
+    "stxdw": 8,
+    "ldxdw": 5,
+    "xor": 8,
+    "and": 8,
+    "rsh": 1,
+    "stxw": 1,
+    "lddw": 2,
+    "call": 2,
+    "atomic": 2,
+    "ldxw": 2,
+    "exit": 1,
+    "lsh": 1
+}

@@ -173,15 +173,15 @@ def main():
                         + (int(hex_str[5], 16)<<8) \
                         + (int(hex_str[4], 16)))
 
-        if(opcodes[hex_opcode][2]):
-            print("r" + str(hex_reg_dst) + " " + str(opcodes[hex_opcode][2]) + " " + "r" + str(hex_reg_src))
-            G.add_node("r" + str(hex_reg_dst))
-            G.add_node("r" + str(hex_reg_src))
-            G.add_node(str(opcodes[hex_opcode][2]))
-            G.add_edge("r" + str(hex_reg_src), str(opcodes[hex_opcode][2]))
-            G.add_edge(str(opcodes[hex_opcode][2]), "r" + str(hex_reg_dst))
-        else:
-            print(str(hex_reg_dst) + ", " + str(opcodes[hex_opcode][2]) + ", " + str(hex_reg_src))
+        # if(opcodes[hex_opcode][2]):
+        #     print("r" + str(hex_reg_dst) + " " + str(opcodes[hex_opcode][2]) + " " + "r" + str(hex_reg_src))
+        #     G.add_node("r" + str(hex_reg_dst))
+        #     G.add_node("r" + str(hex_reg_src))
+        #     G.add_node(str(opcodes[hex_opcode][2]))
+        #     G.add_edge("r" + str(hex_reg_src), str(opcodes[hex_opcode][2]))
+        #     G.add_edge(str(opcodes[hex_opcode][2]), "r" + str(hex_reg_dst))
+        # else:
+        #     print(str(hex_reg_dst) + ", " + str(opcodes[hex_opcode][2]) + ", " + str(hex_reg_src))
 
 
         # count the number of each instruction
@@ -215,11 +215,11 @@ def main():
     # close the file
     f.close()
 
-    pos = nx.spring_layout(G)
-    nx.draw_networkx_nodes(G, pos)
-    nx.draw_networkx_edges(G, pos)
-    nx.draw_networkx_labels(G, pos)
-    plt.show()
+    # pos = nx.spring_layout(G)
+    # nx.draw_networkx_nodes(G, pos)
+    # nx.draw_networkx_edges(G, pos)
+    # nx.draw_networkx_labels(G, pos)
+    # plt.show()
 
         
 

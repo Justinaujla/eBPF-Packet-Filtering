@@ -1,0 +1,10 @@
+{
+    "mov": 6,
+    "stxw": 2,
+    "add": 3,
+    "lddw": 2,
+    "call": 3,
+    "jeq": 1,
+    "jne": 1,
+    "exit": 1
+}

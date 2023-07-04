@@ -1,0 +1,16 @@
+{
+    "mov": 47,
+    "ldabsb": 2,
+    "and": 2,
+    "jne": 1,
+    "stxb": 1,
+    "endxbe": 3,
+    "call": 11,
+    "add": 7,
+    "stxw": 1,
+    "ldabsw": 1,
+    "stxh": 1,
+    "ldabsh": 1,
+    "exit": 5,
+    "ldxw": 4
+}

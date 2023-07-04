@@ -1,0 +1,9 @@
+{
+    "ldxdw": 4,
+    "stxdw": 5,
+    "mov": 9,
+    "add": 5,
+    "lddw": 2,
+    "call": 4,
+    "exit": 2
+}

@@ -1,0 +1,10 @@
+{
+    "call": 1,
+    "mov": 5,
+    "and": 5,
+    "jeq": 5,
+    "endxle": 3,
+    "exit": 7,
+    "ja": 5,
+    "endxbe": 3
+}

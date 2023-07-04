@@ -1,0 +1,102 @@
+{'mov': 2, 'add': 1, 'call': 1, 'exit': 1}
+{'mov': 4, 'stxw': 1, 'lddw': 1, 'add': 2, 'call': 1, 'jne': 1, 'exit': 1}
+{'lddw': 1, 'mov': 3, 'call': 1, 'exit': 1}
+{'mov': 84, 'ldxw': 19, 'call': 18, 'stxh': 1, 'stxb': 3, 'stxw': 41, 'rsh': 2, 'and': 6, 'jlt': 4, 'lsh': 16, 'lddw': 25, 'or': 4, 'arsh': 5, 'add': 24, 'xor': 1, 'exit': 2, 'jeq': 13, 'jne': 5, 'jgt': 6, 'stxdw': 11, 'ldxb': 7, 'ja': 7, 'jslt': 3, 'ldxdw': 4, 'neg': 1}
+{'mov': 3547, 'ldxw': 330, 'call': 730, 'stxh': 207, 'stxb': 250, 'stxw': 1034, 'rsh': 253, 'and': 382, 'jlt': 43, 'lsh': 538, 'lddw': 700, 'or': 326, 'arsh': 207, 'add': 797, 'xor': 21, 'exit': 13, 'stxdw': 679, 'jslt': 152, 'ldxh': 166, 'ldxdw': 577, 'jeq': 405, 'neg': 22, 'ja': 227, 'ldxb': 317, 'jne': 258, 'endxbe': 28, 'sub': 8, 'jgt': 33, 'ldabsb': 5, 'jsgt': 40, 'div': 44, 'jge': 33, 'atomic': 40, 'mul': 4}
+{'mov': 858, 'ldxw': 93, 'call': 194, 'stxh': 15, 'stxb': 103, 'stxw': 223, 'rsh': 19, 'and': 27, 'jlt': 6, 'lsh': 152, 'lddw': 189, 'or': 74, 'arsh': 75, 'add': 222, 'xor': 1, 'exit': 6, 'stxdw': 157, 'jslt': 65, 'ldxh': 13, 'ldxdw': 90, 'jeq': 59, 'neg': 5, 'ja': 36, 'ldxb': 79, 'jne': 36, 'endxbe': 7, 'sub': 2, 'jgt': 12, 'jsgt': 6, 'ldabsb': 2}
+{'mov': 675, 'ldxw': 50, 'call': 143, 'stxh': 10, 'stxb': 96, 'stxw': 130, 'rsh': 14, 'and': 23, 'jlt': 6, 'lsh': 97, 'lddw': 133, 'or': 27, 'arsh': 65, 'add': 160, 'xor': 1, 'exit': 6, 'stxdw': 78, 'jslt': 59, 'ldxh': 10, 'ldxdw': 30, 'jeq': 35, 'neg': 5, 'ja': 18, 'ldxb': 28, 'jne': 18, 'endxbe': 2, 'sub': 2, 'jgt': 8, 'ldabsb': 2}
+{'mov': 19, 'ldxw': 8, 'add': 7, 'jgt': 3, 'ldxb': 18, 'lsh': 15, 'or': 15, 'jeq': 3, 'jne': 3, 'stxw': 13, 'lddw': 4, 'call': 4, 'stxb': 1, 'ja': 1, 'stxdw': 2, 'exit': 1}
+{'mov': 5140, 'mov32': 5142, 'stxw': 858, 'add': 4002, 'lddw': 2423, 'call': 2974, 'jeq': 1305, 'ldxw': 1118, 'sub': 63, 'stxdw': 1777, 'jlt': 77, 'arsh32': 13, 'add32': 1357, 'xor32': 197, 'stxh': 1314, 'ldxdw': 506, 'stxb': 298, 'lsh': 385, 'or': 273, 'exit': 12, 'jgt': 210, 'ldxh': 338, 'endxbe': 527, 'and32': 1020, 'jgt32': 23, 'jne': 1488, 'and': 191, 'ja': 611, 'or32': 861, 'ldxb': 524, 'jslt': 168, 'sub32': 88, 'rsh32': 247, 'neg32': 8, 'rsh': 659, 'jsgt': 28, 'lsh32': 197, 'arsh': 16, 'atomic': 32, 'div32': 522, 'jge': 50, 'mul32': 6}
+{'mov': 5140, 'mov32': 5142, 'stxw': 858, 'add': 4002, 'lddw': 2423, 'call': 2974, 'jeq': 1305, 'ldxw': 1118, 'sub': 63, 'stxdw': 1777, 'jlt': 77, 'arsh32': 13, 'add32': 1357, 'xor32': 197, 'stxh': 1314, 'ldxdw': 506, 'stxb': 298, 'lsh': 385, 'or': 273, 'exit': 12, 'jgt': 210, 'ldxh': 338, 'endxbe': 527, 'and32': 1020, 'jgt32': 23, 'jne': 1488, 'and': 191, 'ja': 611, 'or32': 861, 'ldxb': 524, 'jslt': 168, 'sub32': 88, 'rsh32': 247, 'neg32': 8, 'rsh': 659, 'jsgt': 28, 'lsh32': 197, 'arsh': 16, 'atomic': 32, 'div32': 522, 'jge': 50, 'mul32': 6}
+{'mov': 11300, 'stxw': 533, 'add': 5362, 'lddw': 2740, 'call': 2974, 'jeq': 1305, 'ldxw': 780, 'sub': 151, 'lsh': 2044, 'stxdw': 2056, 'jgt': 258, 'arsh': 196, 'xor': 197, 'ldxdw': 826, 'stxb': 298, 'stxh': 1313, 'or': 1142, 'exit': 12, 'ldxh': 338, 'endxbe': 527, 'and': 1300, 'rsh': 2345, 'jne': 1533, 'ja': 615, 'ldxb': 524, 'jsgt': 196, 'neg': 8, 'atomic': 32, 'div': 522, 'jge': 50, 'mul': 6}
+{'mov': 4947, 'mov32': 5095, 'stxw': 790, 'add': 3890, 'lddw': 2372, 'call': 2911, 'jeq': 1291, 'ldxw': 992, 'sub': 57, 'stxdw': 1668, 'jlt': 86, 'arsh32': 13, 'add32': 1372, 'xor32': 207, 'stxh': 1299, 'ldxdw': 466, 'stxb': 238, 'lsh': 354, 'or': 239, 'exit': 10, 'jgt': 181, 'ldxb': 475, 'jgt32': 21, 'and': 177, 'jne': 1483, 'ja': 573, 'jslt': 152, 'sub32': 86, 'and32': 1033, 'rsh32': 225, 'ldxh': 331, 'lsh32': 194, 'arsh': 17, 'rsh': 660, 'jsgt': 25, 'or32': 861, 'atomic': 32, 'endxbe': 520, 'div32': 522, 'neg32': 6, 'jge': 50, 'mul32': 6}
+{'mov': 4947, 'mov32': 5095, 'stxw': 790, 'add': 3890, 'lddw': 2372, 'call': 2911, 'jeq': 1291, 'ldxw': 992, 'sub': 57, 'stxdw': 1668, 'jlt': 86, 'arsh32': 13, 'add32': 1372, 'xor32': 207, 'stxh': 1299, 'ldxdw': 466, 'stxb': 238, 'lsh': 354, 'or': 239, 'exit': 10, 'jgt': 181, 'ldxb': 475, 'jgt32': 21, 'and': 177, 'jne': 1483, 'ja': 573, 'jslt': 152, 'sub32': 86, 'and32': 1033, 'rsh32': 225, 'ldxh': 331, 'lsh32': 194, 'arsh': 17, 'rsh': 660, 'jsgt': 25, 'or32': 861, 'atomic': 32, 'endxbe': 520, 'div32': 522, 'neg32': 6, 'jge': 50, 'mul32': 6}
+{'mov': 11, 'lddw': 20, 'stxw': 13, 'ldxw': 2, 'jeq': 5, 'jne': 3, 'ldindb': 3, 'lsh': 2, 'rsh': 3, 'ldindw': 12, 'and': 2, 'add': 5, 'stxh': 4, 'call': 3, 'ja': 1, 'ldxdw': 2, 'stxdw': 3, 'exit': 1}
+{'call': 1, 'mov': 5, 'and': 5, 'jeq': 5, 'endxle': 3, 'exit': 7, 'ja': 5, 'endxbe': 3}
+{'mov': 3, 'stxw': 1, 'add': 2, 'lddw': 1, 'call': 1, 'exit': 1}
+{}
+{'stxdw': 1, 'mov': 4, 'stxw': 1, 'add': 2, 'lddw': 1, 'call': 1, 'exit': 1}
+{'stxdw': 1, 'mov': 4, 'stxw': 1, 'add': 2, 'lddw': 1, 'call': 1, 'exit': 1}
+{'lddw': 1, 'stxw': 1, 'ldxw': 1, 'mov': 2, 'jne': 1, 'exit': 1}
+{'call': 7, 'stxw': 3, 'mov': 28, 'add': 5, 'lddw': 5, 'jeq': 4, 'stxdw': 1, 'exit': 2, 'ldxdw': 1, 'sub': 1, 'rsh': 19, 'jgt': 9, 'lsh': 16, 'or': 8, 'and': 2, 'ja': 1, 'ldxw': 1, 'mul': 1, 'atomic': 1}
+{'mov': 5, 'lddw': 11, 'stxw': 1, 'ldxw': 1, 'jeq': 1, 'jne': 1, 'ldindw': 10, 'add': 8, 'ja': 1, 'stxdw': 4, 'ldxdw': 4, 'exit': 1}
+{'mov': 7, 'stxdw': 5, 'ldxdw': 2, 'add': 8, 'jge': 1, 'stxb': 1, 'jne': 2, 'ldxb': 1, 'exit': 1}
+{'mov': 14, 'stxdw': 2, 'ldxw': 1, 'jgt': 4, 'lsh': 7, 'rsh': 8, 'or': 4, 'lddw': 3, 'and': 1, 'add': 3, 'call': 2, 'jeq': 1, 'atomic': 1, 'ja': 1, 'exit': 1}
+{'mov': 6, 'stxw': 2, 'add': 3, 'lddw': 2, 'call': 3, 'jeq': 1, 'jne': 1, 'exit': 1}
+{'mov': 6, 'stxw': 2, 'add': 3, 'lddw': 2, 'call': 3, 'jeq': 1, 'jne': 1, 'exit': 1}
+{'call': 214, 'stxw': 42, 'mov': 252, 'stxdw': 11, 'add': 58, 'lddw': 215, 'jeq': 9, 'exit': 8, 'stxb': 1, 'ldxw': 34, 'jne': 5, 'ldxdw': 1, 'lsh': 2, 'rsh': 2, 'ldxh': 3, 'ja': 3}
+{'mov': 5, 'stxw': 1, 'stxdw': 1, 'add': 2, 'lddw': 1, 'call': 1, 'exit': 1}
+{'lddw': 2, 'stxw': 1, 'mov': 4, 'stxdw': 1, 'add': 2, 'call': 1, 'exit': 1}
+{'mov': 4, 'stxw': 1, 'add': 1, 'lddw': 1, 'call': 1, 'jeq': 1, 'ldxdw': 1, 'exit': 1}
+{'ldxdw': 8, 'ldxw': 5, 'mov': 21, 'stxw': 5, 'add': 19, 'lddw': 4, 'call': 6, 'jeq': 5, 'jgt': 5, 'lsh': 1, 'stxdw': 7, 'jne': 2, 'mul': 4, 'exit': 4}
+{'mov': 3, 'stxw': 2, 'add': 1, 'lddw': 1, 'call': 1, 'exit': 1}
+{'mov': 37, 'ldxdw': 3, 'add': 13, 'call': 17, 'lddw': 11, 'stxw': 7, 'exit': 2, 'ldxw': 7, 'stxdw': 7, 'jeq': 3, 'sub': 1, 'jgt': 1, 'lsh': 2, 'or': 2, 'jne': 1, 'div': 1}
+{'mov': 7, 'call': 1, 'and': 3, 'jeq': 1, 'lsh': 2, 'ldxw': 6, 'add': 4, 'jgt': 2, 'ja': 1, 'exit': 1}
+{'mov': 2, 'ldxw': 3, 'jgt': 1, 'add': 1, 'stxw': 1, 'exit': 1}
+{'mov': 6, 'ldxw': 4, 'add': 3, 'jgt': 1, 'stxw': 2, 'call': 1, 'exit': 1}
+{'mov': 3, 'ldxw': 3, 'add': 2, 'jgt': 1, 'stxw': 1, 'exit': 1}
+{'call': 3952, 'stxw': 1650, 'mov': 23164, 'add': 7108, 'lddw': 4083, 'jeq': 5126, 'ldxb': 13735, 'lsh': 12473, 'or': 11253, 'jne': 927, 'ja': 2929, 'rsh': 8845, 'stxb': 11940, 'exit': 95, 'stxdw': 1698, 'ldxdw': 7835, 'jgt': 1820, 'mul': 150, 'jsgt': 1330, 'and': 1569, 'ldxw': 1093, 'stxh': 693, 'arsh': 334, 'jsge': 33, 'ldxh': 238, 'endxbe': 44, 'jge': 18, 'sub': 136, 'neg': 2, 'div': 13}
+{'mov': 4, 'add': 1, 'lddw': 1, 'call': 1, 'exit': 1}
+{'mov': 6, 'stxw': 2, 'ldxdw': 1, 'stxdw': 1, 'add': 4, 'lddw': 2, 'call': 2, 'jeq': 1, 'ldxw': 1, 'ja': 1, 'exit': 1}
+{'mov': 23, 'stxh': 3, 'stxw': 3, 'lddw': 9, 'stxdw': 10, 'stxb': 3, 'call': 4, 'ldxw': 12, 'add': 3, 'rsh': 1, 'jne': 4, 'jeq': 2, 'exit': 2}
+{'mov': 3, 'ldabsb': 1, 'stxw': 1, 'ldxw': 2, 'jne': 1, 'add': 1, 'lddw': 1, 'call': 1, 'jeq': 1, 'atomic': 1, 'exit': 1}
+{'mov': 62, 'ldabsh': 2, 'jne': 10, 'add': 37, 'ldindh': 7, 'jeq': 13, 'ja': 7, 'ldindb': 5, 'ldindw': 15, 'stxdw': 8, 'ldxdw': 5, 'xor': 8, 'and': 8, 'rsh': 1, 'stxw': 1, 'lddw': 2, 'call': 2, 'atomic': 2, 'ldxw': 2, 'exit': 1, 'lsh': 1}
+{'mov': 103, 'call': 13, 'stxw': 18, 'add': 41, 'lddw': 24, 'jeq': 32, 'ldxw': 16, 'ldindh': 6, 'and': 12, 'jne': 8, 'ldindb': 4, 'lsh': 16, 'rsh': 12, 'ja': 25, 'jsgt': 6, 'stxdw': 17, 'ldindw': 13, 'ldxdw': 13, 'or': 4, 'atomic': 4, 'jgt': 4, 'exit': 5, 'xor': 6, 'ldabsh': 1}
+{'mov': 221, 'ldxdw': 17, 'stxdw': 17, 'add': 17, 'lddw': 85, 'call': 85, 'exit': 17}
+{'mov': 2, 'stxdw': 32, 'call': 1, 'and': 1, 'add': 2, 'ldxb': 1, 'lsh': 1, 'arsh': 1, 'exit': 1}
+{'mov': 14, 'stxw': 6, 'add': 8, 'lddw': 4, 'call': 4, 'jeq': 2, 'ldxw': 2, 'ja': 2, 'exit': 2}
+{'lddw': 1, 'mov': 2, 'call': 1, 'exit': 2}
+{'lddw': 1, 'mov': 2, 'call': 1, 'exit': 2}
+{'mov': 2, 'exit': 2}
+{'mov': 9, 'ldxw': 4, 'stxw': 1, 'add': 2, 'jgt': 1, 'ldxb': 2, 'lsh': 1, 'or': 1, 'jeq': 3, 'lddw': 1, 'call': 2, 'jne': 2, 'ja': 1, 'ldxh': 6, 'stxh': 6, 'exit': 1}
+{'ldxw': 23, 'mov': 64, 'stxw': 10, 'add': 20, 'jgt': 11, 'lddw': 34, 'call': 12, 'jeq': 15, 'ldxh': 7, 'jne': 12, 'stxdw': 34, 'stxb': 4, 'ldxb': 2, 'endxbe': 5, 'ja': 6, 'exit': 4, 'and': 4}
+{'mov': 47, 'ldabsb': 2, 'and': 2, 'jne': 1, 'stxb': 1, 'endxbe': 3, 'call': 11, 'add': 7, 'stxw': 1, 'ldabsw': 1, 'stxh': 1, 'ldabsh': 1, 'exit': 5, 'ldxw': 4}
+{'mov': 20, 'ldxw': 7, 'stxb': 1, 'lddw': 4, 'stxdw': 3, 'add': 3, 'call': 3, 'jne': 6, 'xor': 1, 'and': 1, 'lsh': 1, 'rsh': 1, 'jeq': 1, 'stxh': 1, 'stxw': 2, 'exit': 1}
+{'mov': 28, 'stxw': 4, 'ldxw': 3, 'jeq': 5, 'lddw': 4, 'jne': 1, 'stxh': 2, 'stxdw': 2, 'add': 4, 'call': 4, 'jsgt': 1, 'ja': 3, 'exit': 1}
+{'mov': 52, 'stxw': 4, 'ldxw': 8, 'jeq': 5, 'lddw': 8, 'jne': 4, 'stxb': 1, 'stxdw': 3, 'add': 9, 'call': 8, 'xor': 1, 'and': 1, 'jsgt': 1, 'ja': 5, 'stxh': 1, 'exit': 1}
+{'mov': 20, 'stxh': 2, 'stxw': 3, 'ldxw': 8, 'jeq': 3, 'lddw': 8, 'jne': 5, 'stxb': 1, 'stxdw': 3, 'add': 3, 'call': 3, 'xor': 1, 'and': 1, 'ja': 1, 'exit': 1}
+{'mov': 33, 'stxw': 4, 'ldxw': 3, 'jeq': 5, 'lddw': 5, 'jne': 1, 'stxb': 1, 'stxdw': 3, 'add': 5, 'call': 5, 'jsgt': 1, 'ja': 3, 'stxh': 1, 'exit': 1}
+{'mov': 12, 'ldxw': 8, 'jeq': 2, 'lddw': 5, 'jne': 4, 'stxb': 1, 'stxdw': 3, 'add': 2, 'call': 2, 'xor': 1, 'and': 1, 'stxh': 1, 'stxw': 2, 'exit': 1}
+{'mov': 13, 'ldxw': 8, 'jeq': 2, 'lddw': 5, 'jne': 4, 'stxb': 1, 'stxdw': 3, 'add': 2, 'call': 2, 'xor': 1, 'and': 1, 'stxh': 1, 'stxw': 2, 'exit': 1}
+{'ldxw': 2, 'mov': 15, 'stxh': 2, 'lddw': 4, 'stxdw': 3, 'stxb': 1, 'stxw': 1, 'add': 4, 'jgt': 1, 'ldxb': 1, 'ldxh': 1, 'jne': 1, 'jeq': 2, 'call': 4, 'ja': 2, 'lsh': 1, 'rsh': 1, 'exit': 1}
+{'call': 3, 'stxdw': 1, 'mov': 6, 'stxw': 1, 'lddw': 2, 'lsh': 1, 'rsh': 1, 'jeq': 1, 'add': 2, 'exit': 1}
+{'mov': 25, 'stxw': 13, 'ldxw': 5, 'jne': 7, 'ldxdw': 1, 'add': 11, 'call': 8, 'lsh': 2, 'rsh': 2, 'jeq': 7, 'lddw': 15, 'ja': 7, 'ldxh': 4, 'exit': 1, 'jgt': 1}
+{'mov': 17, 'stxdw': 5, 'ldxdw': 3, 'stxw': 1, 'add': 9, 'call': 5, 'stxh': 1, 'exit': 2}
+{'mov': 2, 'exit': 2}
+{'mov': 2, 'exit': 2}
+{'mov': 9, 'stxdw': 4, 'ldxw': 5, 'lsh': 4, 'arsh': 1, 'jgt': 1, 'ldxdw': 1, 'add': 3, 'call': 3, 'rsh': 1, 'jne': 1, 'lddw': 1, 'jeq': 1, 'or': 2, 'exit': 1}
+{'mov': 34, 'stxh': 2, 'stxw': 4, 'lddw': 18, 'stxdw': 16, 'stxb': 3, 'call': 11, 'ldxdw': 7, 'jgt': 1, 'add': 10, 'ldxw': 1, 'and': 1, 'lsh': 2, 'arsh': 1, 'jsgt': 1, 'ja': 3, 'rsh': 1, 'jne': 1, 'jeq': 2, 'exit': 1}
+{'mov': 7, 'call': 2, 'stxdw': 2, 'add': 1, 'lddw': 1, 'exit': 1}
+{'mov': 36, 'stxdw': 7, 'ldxdw': 3, 'add': 8, 'call': 8, 'lddw': 6, 'jeq': 3, 'ja': 3, 'exit': 2, 'rsh': 19, 'jgt': 8, 'lsh': 16, 'or': 8, 'and': 2, 'atomic': 1}
+{'ldxdw': 4, 'stxdw': 4, 'call': 6, 'mov': 40, 'add': 12, 'lddw': 5, 'exit': 2, 'jeq': 4, 'sub': 3, 'jgt': 12, 'rsh': 9, 'lsh': 5, 'mul': 1, 'stxw': 1}
+{'ldxdw': 4, 'stxdw': 5, 'mov': 9, 'add': 5, 'lddw': 2, 'call': 4, 'exit': 2}
+{'ldxdw': 9, 'lddw': 12, 'mov': 29, 'call': 7, 'add': 8, 'lsh': 1, 'rsh': 1, 'jgt': 2, 'stxb': 2, 'stxdw': 11, 'exit': 4, 'jne': 1, 'stxh': 3, 'stxw': 3}
+{'call': 8, 'stxw': 2, 'lsh': 3, 'rsh': 3, 'lddw': 6, 'mov': 17, 'stxdw': 5, 'add': 8, 'jgt': 1, 'jeq': 2, 'ja': 2, 'exit': 2, 'jne': 1, 'ldxdw': 3}
+{'mov': 2, 'call': 1, 'exit': 1}
+{'call': 2, 'and': 1, 'lddw': 2, 'jeq': 2, 'mov': 4, 'stxw': 1, 'add': 1, 'ldxdw': 1, 'exit': 1}
+{'call': 2, 'and': 1, 'lddw': 2, 'jeq': 2, 'mov': 4, 'stxw': 1, 'add': 1, 'ldxdw': 1, 'exit': 1}
+{'call': 17, 'mov': 7, 'and': 3, 'jeq': 1, 'stxw': 17, 'lsh': 3, 'add': 5, 'xor': 1, 'ja': 1, 'ldxw': 1, 'exit': 1}
+{'call': 2, 'mov': 9, 'stxb': 1, 'stxw': 1, 'add': 2, 'lddw': 1, 'jeq': 3, 'and': 2, 'ldxb': 1, 'exit': 1}
+{'lddw': 1, 'ldxw': 1, 'and': 1, 'jeq': 2, 'mov': 1, 'exit': 1}
+{'mov': 3, 'stxw': 1, 'add': 1, 'lddw': 1, 'call': 1, 'exit': 1}
+{'ldxw': 2, 'mov': 16, 'add': 11, 'jgt': 5, 'ldxb': 4, 'lsh': 1, 'or': 1, 'jeq': 4, 'jne': 3, 'ldxh': 2, 'and': 2, 'ja': 2, 'stxw': 2, 'lddw': 1, 'call': 1, 'ldxdw': 1, 'stxdw': 1, 'exit': 1}
+{'mov': 20, 'ldxw': 3, 'add': 11, 'jgt': 5, 'ldxb': 4, 'lsh': 1, 'or': 1, 'jeq': 4, 'jne': 4, 'ldxh': 8, 'and': 2, 'ja': 2, 'stxw': 1, 'lddw': 1, 'call': 1, 'ldxdw': 1, 'stxdw': 1, 'stxh': 6, 'exit': 1}
+{'mov': 9, 'lddw': 1, 'call': 1, 'lsh': 1, 'arsh': 1, 'jsgt': 1, 'ldxw': 5, 'add': 2, 'jgt': 2, 'stxw': 2, 'exit': 2}
+{'mov': 31, 'ldxw': 6, 'add': 8, 'jgt': 2, 'ldxb': 16, 'lsh': 4, 'or': 1, 'jne': 3, 'sub': 2, 'arsh': 1, 'jsgt': 1, 'call': 5, 'rsh': 4, 'lddw': 2, 'stxb': 14, 'stxw': 5, 'stxh': 3, 'xor': 2, 'stxdw': 2, 'jeq': 1, 'ldxdw': 1, 'exit': 1}
+{'ldxw': 4, 'mov': 10, 'stxw': 1, 'add': 5, 'jgt': 2, 'lddw': 3, 'call': 3, 'jeq': 5, 'ldxdw': 2, 'and': 3, 'ldxb': 2, 'lsh': 1, 'or': 1, 'stxh': 7, 'ldxh': 7, 'jne': 2, 'stxdw': 1, 'exit': 1}
+{'mov': 35, 'ldxw': 8, 'stxw': 4, 'add': 17, 'jgt': 9, 'lddw': 7, 'call': 7, 'jeq': 8, 'stxdw': 5, 'ldxdw': 6, 'jne': 5, 'ldxb': 2, 'lsh': 4, 'or': 1, 'and': 2, 'ldxh': 1, 'rsh': 1, 'exit': 1, 'ja': 1}
+{'ldxw': 9, 'jeq': 16, 'mov': 51, 'jne': 7, 'add': 21, 'jgt': 9, 'ja': 3, 'ldxh': 4, 'endxbe': 2, 'stxw': 6, 'lddw': 8, 'call': 6, 'lsh': 3, 'and': 5, 'exit': 2, 'ldxb': 3, 'or': 1, 'ldxdw': 2, 'stxdw': 2}
+{'mov': 64, 'ldxw': 25, 'add': 44, 'jgt': 9, 'ldxb': 6, 'lsh': 15, 'or': 5, 'jeq': 15, 'jne': 5, 'ldxh': 8, 'and': 14, 'stxw': 9, 'lddw': 18, 'call': 11, 'ja': 6, 'stxdw': 13, 'stxh': 4, 'ldxdw': 6, 'sub': 4, 'rsh': 12, 'xor': 10, 'div': 2, 'mul': 2, 'exit': 1}
+{'mov': 52, 'ldxw': 32, 'add': 20, 'jgt': 12, 'stxdw': 16, 'ldxb': 18, 'lsh': 4, 'or': 2, 'jne': 10, 'stxb': 38, 'stxh': 14, 'ldxh': 14, 'endxbe': 4, 'stxw': 24, 'ja': 4, 'lddw': 4, 'and': 2, 'call': 4, 'rsh': 16, 'exit': 2}
+{'ldxw': 14, 'mov': 44, 'jne': 4, 'stxw': 8, 'add': 24, 'lddw': 8, 'call': 8, 'jeq': 11, 'ldxdw': 16, 'stxdw': 16, 'exit': 8, 'jgt': 2, 'lsh': 2, 'arsh': 2, 'jsgt': 1}
+{'mov': 150, 'stxw': 23, 'add': 95, 'lddw': 30, 'call': 26, 'jeq': 40, 'ldxw': 50, 'ldxdw': 24, 'stxdw': 24, 'jgt': 29, 'ja': 16, 'exit': 11, 'ldxb': 12, 'lsh': 10, 'rsh': 8, 'or': 3, 'and': 14, 'jne': 15, 'ldxh': 7, 'endxbe': 3, 'jsgt': 2, 'xor': 7, 'div': 1, 'mul': 1, 'sub': 1}
+{'ldxw': 2, 'mov': 13, 'stxw': 2, 'add': 6, 'jgt': 1, 'lddw': 4, 'call': 3, 'jeq': 2, 'ldxdw': 2, 'stxdw': 2, 'ldxh': 6, 'stxh': 6, 'exit': 3, 'rsh': 1, 'and': 1, 'sub': 1, 'lsh': 1, 'arsh': 1, 'jsgt': 1}
+{'ldxw': 3, 'mov': 10, 'stxw': 2, 'add': 4, 'jgt': 1, 'lddw': 2, 'call': 3, 'jeq': 2, 'ldxdw': 1, 'stxdw': 1, 'ldxh': 6, 'stxh': 6, 'exit': 2}
+{'ldxw': 2, 'mov': 7, 'stxw': 1, 'add': 3, 'jgt': 1, 'lddw': 2, 'call': 2, 'jeq': 1, 'ldxdw': 1, 'stxdw': 1, 'ldxh': 6, 'stxh': 6, 'exit': 2}
+{'ldxw': 6, 'mov': 30, 'add': 12, 'jgt': 3, 'ldxb': 3, 'lsh': 1, 'or': 1, 'jeq': 8, 'jne': 4, 'ldxh': 7, 'and': 1, 'stxw': 6, 'lddw': 6, 'call': 6, 'ldxdw': 3, 'rsh': 3, 'stxb': 4, 'stxh': 6, 'stxdw': 1, 'ja': 1, 'exit': 1}
+{'mov': 13, 'ldxw': 8, 'stxdw': 6, 'stxw': 2, 'add': 8, 'lddw': 3, 'call': 3, 'jeq': 6, 'ldxdw': 8, 'ja': 1, 'jgt': 3, 'jne': 1, 'and': 2, 'ldxb': 1, 'ldxh': 6, 'stxh': 6, 'exit': 1}
+{'ldxw': 2, 'jge': 1, 'sub': 1, 'mov': 12, 'stxh': 3, 'and': 1, 'jgt': 1, 'lsh': 2, 'lddw': 5, 'or': 1, 'add': 2, 'call': 2, 'rsh': 1, 'jeq': 1, 'stxw': 1, 'stxdw': 3, 'exit': 1}
+{'ldxw': 2, 'jge': 1, 'mov': 4, 'stxh': 2, 'sub': 1, 'lsh': 1, 'lddw': 3, 'and': 1, 'or': 1, 'add': 1, 'call': 1, 'exit': 1}
+{'mov': 12, 'ldxw': 2, 'add': 6, 'jgt': 4, 'ldxb': 3, 'lsh': 1, 'or': 1, 'and': 2, 'jeq': 2, 'jne': 2, 'ldxh': 1, 'stxw': 1, 'lddw': 1, 'call': 1, 'ldxdw': 1, 'stxdw': 1, 'exit': 1}
+{'mov': 57, 'ldxw': 21, 'add': 28, 'jgt': 13, 'ldxb': 30, 'lsh': 5, 'or': 3, 'jeq': 7, 'jne': 7, 'stxdw': 9, 'ja': 3, 'ldxh': 9, 'stxb': 34, 'stxh': 12, 'stxw': 13, 'lddw': 6, 'call': 6, 'rsh': 5, 'endxbe': 4, 'and': 2, 'xor': 1, 'ldxdw': 1, 'exit': 1}
+{'mov': 21, 'ldxw': 11, 'add': 4, 'jgt': 4, 'ldxb': 20, 'lsh': 5, 'or': 4, 'jeq': 5, 'jne': 5, 'ldxh': 3, 'and': 3, 'exit': 5, 'endxbe': 1, 'stxh': 1, 'stxb': 12, 'call': 3, 'stxw': 3}
