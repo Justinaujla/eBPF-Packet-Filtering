@@ -1,3 +1,4 @@
+from io import TextIOWrapper
 import sys
 from pathlib import Path
 import json
@@ -5,14 +6,31 @@ import json
 import networkx as nx
 import matplotlib.pyplot as plt
 
+import re
+
+from enum import Enum
+
+class ASM_FILE_READ(Enum):
+    NO_NEW_LINE = 0
+    DATA_FOUND = 1
 
 class RegisterNode:
-    def __init__(self, register_name):
-        self.register_name = register_name
+    """
+    Generates a new node for a register number
+    """
 
-# name, opclass, op, bits
-# note: byte swap bits depends on immediate, nothing in opcode
-# todo: atomic opcode needs further breakdown into add, or, and, xor based on immediate
+    def __init__(self, reg_idx, lvl):
+        self.register_index = reg_idx
+        self.register_level = lvl
+        self.label = 'R' + str(reg_idx)
+
+    def get_label(self):
+        return self.label
+
+# Regex pattern that detects the start of a basic block
+disasm_blk_ptrn = "[abcdef\d]{16} <.+>:"
+
+# TODO: Replace with definition in data_structures.py
 opcodes = {0x04: ('add32',    'dstimm',     '+=',     32),
             0x05: ('ja',       'joff',       None,     64),
             0x07: ('add',      'dstimm',     '+=',     64),
@@ -125,21 +143,19 @@ opcodes = {0x04: ('add32',    'dstimm',     '+=',     32),
             0xdc: ('endxbe',   'dstsrc',     'be',     64),
             0xdd: ('jsle',     'jdstimmoff', 's<=',    64),}
 
-def main():
+def count_asm():
     diss_asm: str
     hex_str: str
     opcodes_count = {}
-    G = nx.MultiDiGraph()
-    line_count = 0
 
     with open(sys.argv[-1], "r") as f:
         diss_asm = f.read()
 
     for line in diss_asm.split('\n'):
-        line_count += 1
 
         if line.strip() == '':
             continue
+
         hex_str = line.split(':')[1].split('\t')
 
         if ( len(hex_str) != 3 ):
@@ -148,41 +164,6 @@ def main():
         hex_str = hex_str[1].split(' ')
 
         hex_opcode = int(hex_str[0], 16)
-        hex_reg_dst = (int(hex_str[1], 16) & 0xF)
-        hex_reg_src = (int(hex_str[1], 16)  & 0xF0) >> 4
-        hex_offset = ((int(hex_str[3], 16)<<8) + int(hex_str[2], 16))
-        if(hex_opcode == 24):
-            # 64 bit imm
-            hex_imm = ((int(hex_str[15], 16) << 88) \
-                        + (int(hex_str[14], 16) << 80) \
-                        + (int(hex_str[13], 16) << 72) \
-                        + (int(hex_str[12], 16) << 64) \
-                        + (int(hex_str[11], 16) << 56) \
-                        + (int(hex_str[10], 16) << 48) \
-                        + (int(hex_str[9], 16) << 40) \
-                        + (int(hex_str[8], 16) << 32) \
-                        + (int(hex_str[7], 16) << 24) \
-                        + (int(hex_str[6], 16) << 16) \
-                        + (int(hex_str[5], 16) << 8) \
-                        + (int(hex_str[4], 16)))
-
-        else:
-            # 32 bit imm
-            hex_imm = ((int(hex_str[7], 16)<<24) \
-                        + (int(hex_str[6], 16)<<16) \
-                        + (int(hex_str[5], 16)<<8) \
-                        + (int(hex_str[4], 16)))
-
-        # if(opcodes[hex_opcode][2]):
-        #     print("r" + str(hex_reg_dst) + " " + str(opcodes[hex_opcode][2]) + " " + "r" + str(hex_reg_src))
-        #     G.add_node("r" + str(hex_reg_dst))
-        #     G.add_node("r" + str(hex_reg_src))
-        #     G.add_node(str(opcodes[hex_opcode][2]))
-        #     G.add_edge("r" + str(hex_reg_src), str(opcodes[hex_opcode][2]))
-        #     G.add_edge(str(opcodes[hex_opcode][2]), "r" + str(hex_reg_dst))
-        # else:
-        #     print(str(hex_reg_dst) + ", " + str(opcodes[hex_opcode][2]) + ", " + str(hex_reg_src))
-
 
         # count the number of each instruction
         if opcodes[hex_opcode][0] in opcodes_count:
@@ -215,13 +196,96 @@ def main():
     # close the file
     f.close()
 
-    # pos = nx.spring_layout(G)
-    # nx.draw_networkx_nodes(G, pos)
-    # nx.draw_networkx_edges(G, pos)
-    # nx.draw_networkx_labels(G, pos)
-    # plt.show()
 
+def main():
+    hex_str: str
+    opcodes_count = {}
+    nodes = []
+    line_count = 0
+
+    G = nx.DiGraph()
+
+    disasm_file = open(sys.argv[-1], "r")
+
+    while True:
+        # Find the next basic block
+        if( find_block( disasm_file ) == ASM_FILE_READ.DATA_FOUND ):
+            # Block found -> process lines
+
+            process_lines( disasm_file )
+        else:
+            break
+
+
+# Read the current file until a basic block is found, then return
+def find_block( f : TextIOWrapper ) -> ASM_FILE_READ:
+    asm_line: str
+    while True:
+        asm_line = f.readline()
+
+        if not asm_line:
+            return ASM_FILE_READ.NO_NEW_LINE
         
+        if asm_line.strip() == '':
+            continue
+
+        if( re.search(disasm_blk_ptrn, asm_line) ):
+            if __debug__:
+                print("BLOCK: " + asm_line)
+            return ASM_FILE_READ.DATA_FOUND
+
+def process_lines( f: TextIOWrapper ) -> None:
+    asm_line: str
+    hex_str: str
+    while True:
+        asm_line = f.readline()
+
+        if not asm_line:
+            return
+        
+        if asm_line.strip() == '':
+            return
+
+        hex_str = asm_line.split(':')[1].split('\t')
+
+        if ( len(hex_str) != 3 ):
+            print("ERROR")
+            exit()
+        
+        hex_str = hex_str[1].split(' ')
+
+        hex_opcode = int(hex_str[0], 16)
+        hex_reg_dst = (int(hex_str[1], 16) & 0xF)
+        hex_reg_src = (int(hex_str[1], 16)  & 0xF0) >> 4
+        hex_offset = ((int(hex_str[3], 16)<<8) + int(hex_str[2], 16))
+        if(hex_opcode == 24):
+            # 64 bit imm
+            hex_imm = ((int(hex_str[15], 16) << 88) \
+                        + (int(hex_str[14], 16) << 80) \
+                        + (int(hex_str[13], 16) << 72) \
+                        + (int(hex_str[12], 16) << 64) \
+                        + (int(hex_str[11], 16) << 56) \
+                        + (int(hex_str[10], 16) << 48) \
+                        + (int(hex_str[9], 16) << 40) \
+                        + (int(hex_str[8], 16) << 32) \
+                        + (int(hex_str[7], 16) << 24) \
+                        + (int(hex_str[6], 16) << 16) \
+                        + (int(hex_str[5], 16) << 8) \
+                        + (int(hex_str[4], 16)))
+
+        else:
+            # 32 bit imm
+            hex_imm = ((int(hex_str[7], 16)<<24) \
+                        + (int(hex_str[6], 16)<<16) \
+                        + (int(hex_str[5], 16)<<8) \
+                        + (int(hex_str[4], 16)))
+        if __debug__:
+            print( "OPCODE: " + hex(hex_opcode) )
+            print( "REG_DST: " + str(hex_reg_dst) )
+            print( "REG_SRC: " + str(hex_reg_src) )
+            print( "OFFSET: " + str(hex_offset) )
+            print( "IMM: " + str(hex_imm) + '\n')
+
 
 if __name__ == "__main__":
     main()
