@@ -2,6 +2,7 @@
 DEFINES
 '''
 IMM_ENABLE = 0
+ALL_OP_EDGE_ENABLE = 1
 
 import sys
 from io import TextIOWrapper
@@ -60,6 +61,21 @@ class ImmediateValueNode:
     def get_level(self):
         return self.register_level
     
+class JumpNode:
+    """
+    Generates a new node for jumps
+    """
+
+    def __init__(self, lvl):
+        self.register_level = lvl
+        self.label = 'Jmp'
+
+    def get_label(self):
+        return self.label
+    
+    def get_level(self):
+        return self.register_level
+    
 class OperationNode:
     """
     Generates a new node for an operator
@@ -88,6 +104,7 @@ G = nx.DiGraph()
 labels = {}
 
 reg_operations = ['!=', '%=', '&=', '*=', '+=', '-=', '/=', '<<=', '=','>>=', '^=', 'be', 'le', 's>>=', '|=', '~']
+# reg_operations = ['!', '%', '&', '*', '+', '-', '/', '<<', '=','>>', '^', 'be', 'le', 's>>', '|', '~']
 jmp_comparisons = ['<=', '&', '>', 's>', 's<', '==', 's>=', '<', 's<=', '>=']
 
 # TODO: Replace with definition in data_structures.py
@@ -171,7 +188,7 @@ opcodes = {0x04: ('add32',    'dstimm',        {'output': ASM_OPCODE_PARAMS.DST,
             0x85: ('call',     'call',         {'output': ASM_OPCODE_PARAMS.JUMP, 'inputs': [ASM_OPCODE_PARAMS.IMM]},                                                       None,     64),
             0x87: ('neg',      'dst',          {'output': ASM_OPCODE_PARAMS.DST, 'inputs': [ASM_OPCODE_PARAMS.DST]},                                                        '~',      64),
             0x94: ('mod32',    'dstimm',       {'output': ASM_OPCODE_PARAMS.DST, 'inputs': [ASM_OPCODE_PARAMS.DST, ASM_OPCODE_PARAMS.IMM]},                                 '%=',     32),
-            0x95: ('exit',     'exit',         {'output': None, 'inputs': None},                                                                                            None,     64),
+            0x95: ('exit',     'exit',         {'output': ASM_OPCODE_PARAMS.EXIT, 'inputs': None},                                                                                            None,     64),
             0x97: ('mod',      'dstimm',       {'output': ASM_OPCODE_PARAMS.DST, 'inputs': [ASM_OPCODE_PARAMS.DST, ASM_OPCODE_PARAMS.IMM]},                                 '%=',     64),
             0x9c: ('mod32',    'dstsrc',       {'output': ASM_OPCODE_PARAMS.DST, 'inputs': [ASM_OPCODE_PARAMS.DST, ASM_OPCODE_PARAMS.SRC]},                                 '%=',     32),
             0x9f: ('mod',      'dstsrc',       {'output': ASM_OPCODE_PARAMS.DST, 'inputs': [ASM_OPCODE_PARAMS.DST, ASM_OPCODE_PARAMS.SRC]},                                 '%=',     64),
@@ -426,57 +443,85 @@ def process_lines( f: TextIOWrapper ):
                     # if the register is an input and the operation node is the active operation
                     if (i in input_regs) and (op_node.get_operation() == opcodes[hex_opcode][3]):
                         # active_edge found
-                        G.add_edge((nodes_all[gline_count-1][i], op_node))
+                        G.add_edge(nodes_all[gline_count-1][i], op_node)
                         action_edges.append((nodes_all[gline_count-1][i], op_node))
+                    else:
+                        G.add_edge(nodes_all[gline_count-1][i], op_node)
+                        if ALL_OP_EDGE_ENABLE:
+                            carry_edges.append((nodes_all[gline_count-1][i], op_node))
+        elif ( opcodes[hex_opcode][2]["output"] == ASM_OPCODE_PARAMS.JUMP ):
+            # Create jump layer
+            nodes_curr_lvl.append(JumpNode(gline_count))
+            G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
 
+            # Add the jump layer to all nodes
+            nodes_all.append(nodes_curr_lvl)
 
+            # Find active_edges
+            input_regs = []
+            for input in opcodes[hex_opcode][2]["inputs"]:
+                match input:
+                    case ASM_OPCODE_PARAMS.DST:
+                        input_regs.append(hex_reg_dst)
+                    case ASM_OPCODE_PARAMS.SRC:
+                        input_regs.append(hex_reg_src)
+                    case ASM_OPCODE_PARAMS.IMM:
+                        if IMM_ENABLE:
+                            print("TODO")
+                    case ASM_OPCODE_PARAMS.OFFSET:
+                        if IMM_ENABLE:
+                            print("TODO")
+                    case _:
+                        print("ERROR")
 
-
-        # # Generate new row of registers
+            # Connect edges
+            for i in range(0, 11):
+                for jmp_node in nodes_curr_lvl:
+                    # if the register is an input and the operation node is the active operation
+                    if (i in input_regs):
+                        # active_edge found
+                        G.add_edge(nodes_all[gline_count-1][i], jmp_node)
+                        action_edges.append((nodes_all[gline_count-1][i], jmp_node))
+                    else:
+                        G.add_edge(nodes_all[gline_count-1][i], jmp_node)
+                        if ALL_OP_EDGE_ENABLE:
+                            carry_edges.append((nodes_all[gline_count-1][i], jmp_node))
+        elif( opcodes[hex_opcode][2]["output"] == ASM_OPCODE_PARAMS.EXIT ):
+            gline_count = gline_count - 1
+        
         nodes_curr_lvl = []
+        gline_count = gline_count + 1
+
+        # Create destination register layer
         for idx in range(0, 11):
             nodes_curr_lvl.append(RegisterNode(idx, gline_count))
             G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
         
-        # Add 'immediate' node
-        if IMM_ENABLE:
-            nodes_curr_lvl.append(ImmediateValueNode(gline_count))
-            G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
-
         # Add new row to all nodes list
         nodes_all.append(nodes_curr_lvl)
-        
-        
-        # Add edges to graph
+
         if( opcodes[hex_opcode][2]["output"] == ASM_OPCODE_PARAMS.DST ):
-            ignore_reg = hex_reg_dst
-
-            for i in range(0, 11):
-                if( i == ignore_reg ):
-                    for input in opcodes[hex_opcode][2]["inputs"]:
-                            match input:
-                                case ASM_OPCODE_PARAMS.DST:
-                                    G.add_edge(nodes_all[gline_count-1][hex_reg_dst-1], nodes_all[gline_count][hex_reg_dst-1])
-                                    action_edges.append((nodes_all[gline_count-1][hex_reg_dst], nodes_all[gline_count][hex_reg_dst]))
-                                case ASM_OPCODE_PARAMS.SRC:
-                                    G.add_edge(nodes_all[gline_count-1][hex_reg_src-1], nodes_all[gline_count][hex_reg_dst-1])
-                                    action_edges.append((nodes_all[gline_count-1][hex_reg_src], nodes_all[gline_count][hex_reg_dst]))
-                                case ASM_OPCODE_PARAMS.IMM:
-                                    if IMM_ENABLE:
-                                        G.add_edge(nodes_all[gline_count-1][11], nodes_all[gline_count][hex_reg_dst])
-                                case ASM_OPCODE_PARAMS.OFFSET:
-                                    if IMM_ENABLE:
-                                        G.add_edge(nodes_all[gline_count-1][11], nodes_all[gline_count][hex_reg_dst])
-                                case _:
-                                    print("ERROR")
-                    G.add_edge(nodes_all[gline_count-1][i], nodes_all[gline_count][i])
-                else:
-                    G.add_edge(nodes_all[gline_count-1][i], nodes_all[gline_count][i])
+            for op_node in nodes_all[gline_count-1]:
+                for i in range(0,11):
+                    if (i == hex_reg_dst) and (op_node.get_operation() == opcodes[hex_opcode][3]):
+                        # active_edge found
+                        G.add_edge(op_node, nodes_all[gline_count][i])
+                        action_edges.append((op_node, nodes_all[gline_count][i]))
+                    else:
+                        G.add_edge(op_node, nodes_all[gline_count][i])
+                        if ALL_OP_EDGE_ENABLE:
+                            carry_edges.append((op_node, nodes_all[gline_count][i]))
+        elif( opcodes[hex_opcode][2]["output"] == ASM_OPCODE_PARAMS.JUMP ):
+            for jmp_node in nodes_all[gline_count-1]:
+                for i in range(0,11):
+                    G.add_edge(jmp_node, nodes_all[gline_count][i])
+                    if ALL_OP_EDGE_ENABLE:
+                        carry_edges.append((jmp_node, nodes_all[gline_count][i]))
+        elif( opcodes[hex_opcode][2]["output"] == ASM_OPCODE_PARAMS.EXIT ):
+            for i in range(0,11):
+                G.add_edge(nodes_all[gline_count-1][i], nodes_all[gline_count][i])
+                if ALL_OP_EDGE_ENABLE:
                     carry_edges.append((nodes_all[gline_count-1][i], nodes_all[gline_count][i]))
-        else:
-            ignore_reg = -1
-
-
 
 if __name__ == "__main__":
     main()
