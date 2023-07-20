@@ -2,7 +2,7 @@
 DEFINES
 '''
 IMM_ENABLE = 0
-ALL_OP_EDGE_ENABLE = 1
+ALL_OP_EDGE_ENABLE = 0
 
 import sys
 from io import TextIOWrapper
@@ -305,6 +305,7 @@ def main():
 
             import matplotlib.pyplot as plt
             pos = nx.nx_agraph.graphviz_layout(G, prog="dot")
+            
             nx.draw_networkx_nodes(G, pos, node_size=600)
             nx.draw_networkx_edges(G, pos, edgelist=carry_edges)
             nx.draw_networkx_edges(G, pos, edgelist=action_edges, edge_color=(0,0,1,1))
@@ -413,9 +414,12 @@ def process_lines( f: TextIOWrapper ):
         gline_count = gline_count + 1
         if( opcodes[hex_opcode][2]["output"] == ASM_OPCODE_PARAMS.DST ):
             # Create operations layer
-            for op in reg_operations:
-                nodes_curr_lvl.append(OperationNode(op, gline_count))
-                G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
+            nodes_curr_lvl.append(OperationNode(opcodes[hex_opcode][3], gline_count))
+            G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
+
+            # for op in reg_operations:
+            #     nodes_curr_lvl.append(OperationNode(op, gline_count))
+            #     G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
 
             # Add the operation layer to all nodes
             nodes_all.append(nodes_curr_lvl)
