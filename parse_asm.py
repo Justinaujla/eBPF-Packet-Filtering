@@ -285,35 +285,56 @@ def main():
 
     disasm_file = open(sys.argv[-1], "r")
 
-    while True:
-        # Find the next basic block
-        if( find_block( disasm_file ) == ASM_FILE_READ.DATA_FOUND ):
-            # gline_count = gline_count + 1
-            # Block found -> process lines
+    # while True:
+    #     # Find the next basic block
+    #     if( find_block( disasm_file ) == ASM_FILE_READ.DATA_FOUND ):
+    #         # gline_count = gline_count + 1
+    #         # Block found -> process lines
 
-            # process_lines( disasm_file )
-            ret = process_lines( disasm_file )
-            node_list = ret[0]
-            action_edges = ret[1]
-            carry_edges = ret[2]
+    #         # process_lines( disasm_file )
+    #         ret = process_lines( disasm_file )
+    #         node_list = ret[0]
+    #         action_edges = ret[1]
+    #         carry_edges = ret[2]
 
 
-            labels = {}
-            for nodes in node_list:
-                for node in nodes:
-                    labels[node] = node.get_label()
+    #         labels = {}
+    #         for nodes in node_list:
+    #             for node in nodes:
+    #                 labels[node] = node.get_label()
 
-            import matplotlib.pyplot as plt
-            pos = nx.nx_agraph.graphviz_layout(G, prog="dot")
+    #         import matplotlib.pyplot as plt
+    #         pos = nx.nx_agraph.graphviz_layout(G, prog="dot")
             
-            nx.draw_networkx_nodes(G, pos, node_size=600)
-            nx.draw_networkx_edges(G, pos, edgelist=carry_edges)
-            nx.draw_networkx_edges(G, pos, edgelist=action_edges, edge_color=(0,0,1,1))
-            nx.draw_networkx_labels(G, pos, labels, font_weight='bold')
-            # nx.draw(G, pos=pos, labels=labels, with_labels=True, node_size=600, font_weight='bold')
-            plt.show()
-        else:
-            break
+    #         nx.draw_networkx_nodes(G, pos, node_size=600)
+    #         nx.draw_networkx_edges(G, pos, edgelist=carry_edges)
+    #         nx.draw_networkx_edges(G, pos, edgelist=action_edges, edge_color=(0,0,1,1))
+    #         nx.draw_networkx_labels(G, pos, labels, font_weight='bold')
+    #         # nx.draw(G, pos=pos, labels=labels, with_labels=True, node_size=600, font_weight='bold')
+    #         plt.show()
+    #     else:
+    #         break
+    ret = process_lines( disasm_file )
+    node_list = ret[0]
+    action_edges = ret[1]
+    carry_edges = ret[2]
+
+
+    labels = {}
+    for nodes in node_list:
+        for node in nodes:
+            labels[node] = node.get_label()
+
+    import matplotlib.pyplot as plt
+    pos = nx.nx_agraph.graphviz_layout(G, prog="dot")
+    
+    nx.draw_networkx_nodes(G, pos, node_size=600)
+    nx.draw_networkx_edges(G, pos, edgelist=carry_edges)
+    nx.draw_networkx_edges(G, pos, edgelist=action_edges, edge_color=(0,0,1,1))
+    nx.draw_networkx_labels(G, pos, labels, font_weight='bold')
+
+    # nx.draw(G, pos=pos, labels=labels, with_labels=True, node_size=600, font_weight='bold')
+    plt.show()
 
 
 # Read the current file until a basic block is found, then return
@@ -365,14 +386,12 @@ def process_lines( f: TextIOWrapper ):
             return [nodes_all, action_edges, carry_edges]
         
         if asm_line.strip() == '':
-            return [nodes_all, action_edges, carry_edges]
+            continue
 
         hex_str = asm_line.split(':')[1].split('\t')
 
         if ( len(hex_str) != 3 ):
-            print("ERROR")
-            exit()
-        
+            continue
 
         # Valid instruction found;
         # begin procesing operation information
@@ -417,6 +436,7 @@ def process_lines( f: TextIOWrapper ):
             nodes_curr_lvl.append(OperationNode(opcodes[hex_opcode][3], gline_count))
             G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
 
+            ### TODO: REMOVE - GENERATES ALL OPERATIONS ###
             # for op in reg_operations:
             #     nodes_curr_lvl.append(OperationNode(op, gline_count))
             #     G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
