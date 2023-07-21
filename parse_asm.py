@@ -76,6 +76,21 @@ class JumpNode:
     
     def get_level(self):
         return self.register_level
+
+class ExitNode:
+    """
+    Generates a new node for jumps
+    """
+
+    def __init__(self, lvl):
+        self.register_level = lvl
+        self.label = 'Exit'
+
+    def get_label(self):
+        return self.label
+    
+    def get_level(self):
+        return self.register_level
     
 class OperationNode:
     """
@@ -367,7 +382,7 @@ def pre_process_lines (f: TextIOWrapper ):
     asm_line: str
     hex_str: str
     basic_block_sizes = []
-    curr_count = 1 # SET TO 1 TO ACCOUNT FOR INITAL REGISTER LAYER
+    curr_count = 0
 
     while True:
         asm_line = f.readline()
@@ -567,7 +582,22 @@ def process_lines( f: TextIOWrapper ):
             return [nodes_all, action_edges, carry_edges]
 
         elif( opcodes[hex_opcode][2]["output"] == ASM_OPCODE_PARAMS.EXIT ):
-            gline_count = gline_count - 1
+            # gline_count = gline_count - 1
+            # Create exit layer
+            nodes_curr_lvl.append(ExitNode(gline_count))
+            G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
+
+            # Add the jump layer to all nodes
+            nodes_all.append(nodes_curr_lvl)
+
+            # Connect edges
+            num_nodes = 12 if IMM_ENABLE else 11
+            for i in range(0, num_nodes):
+                for exit_node in nodes_curr_lvl:
+                    G.add_edge(nodes_all[gline_count-1][i], exit_node)
+                    if ALL_OP_EDGE_ENABLE:
+                        carry_edges.append((nodes_all[gline_count-1][i], exit_node))
+            continue
         
         nodes_curr_lvl = []
         gline_count = gline_count + 1
