@@ -1,7 +1,7 @@
 '''
 DEFINES
 '''
-IMM_ENABLE = 0
+IMM_ENABLE = 1
 ALL_OP_EDGE_ENABLE = 0
 
 import sys
@@ -314,19 +314,31 @@ def main():
 
         pos = nx.nx_agraph.graphviz_layout(G, prog="dot")
         
-        # plt.subplot(num_plots, 2, graph_num)
         nx.draw_networkx_nodes(G, pos, ax=axs[graph_row][graph_col], node_size=300)
         nx.draw_networkx_edges(G, pos, ax=axs[graph_row][graph_col], edgelist=carry_edges)
-        nx.draw_networkx_edges(G, pos, ax=axs[graph_row][graph_col], edgelist=action_edges, edge_color=(0,0,1,1))
+        nx.draw_networkx_edges(G, pos, ax=axs[graph_row][graph_col], edgelist=action_edges, edge_color='b')
         nx.draw_networkx_labels(G, pos, labels, ax=axs[graph_row][graph_col], font_size=8)
 
         # Create new graph
         G = nx.DiGraph()
+
+        # 2D indexing
         graph_col += 1
         if( graph_col == graph_dims_sqr ):
             graph_col = 0
             graph_row += 1
+        
+        # Reset line_count due to new subplot
         gline_count = 0
+    while( not(graph_row == graph_dims_sqr) and not (graph_col == graph_dims_sqr) ):
+        fig.delaxes(axs[graph_row][graph_col])
+        # 2D indexing
+        graph_col += 1
+        if( graph_col == graph_dims_sqr ):
+            graph_col = 0
+            graph_row += 1
+        if( graph_row == 3 ):
+            break
 
     # nx.draw(G, pos=pos, labels=labels, with_labels=True, node_size=600, font_weight='bold')
     plt.tight_layout()
@@ -493,15 +505,16 @@ def process_lines( f: TextIOWrapper ):
                         input_regs.append(hex_reg_src)
                     case ASM_OPCODE_PARAMS.IMM:
                         if IMM_ENABLE:
-                            print("TODO")
+                            input_regs.append(11)
                     case ASM_OPCODE_PARAMS.OFFSET:
                         if IMM_ENABLE:
-                            print("TODO")
+                            input_regs.append(11)
                     case _:
                         print("ERROR")
             
             # Connect edges
-            for i in range(0, 11):
+            num_nodes = 12 if IMM_ENABLE else 11
+            for i in range(0, num_nodes):
                 for op_node in nodes_curr_lvl:
                     # if the register is an input and the operation node is the active operation
                     if (i in input_regs) and (op_node.get_operation() == opcodes[hex_opcode][3]):
@@ -530,15 +543,16 @@ def process_lines( f: TextIOWrapper ):
                         input_regs.append(hex_reg_src)
                     case ASM_OPCODE_PARAMS.IMM:
                         if IMM_ENABLE:
-                            print("TODO")
+                            input_regs.append(11)
                     case ASM_OPCODE_PARAMS.OFFSET:
                         if IMM_ENABLE:
-                            print("TODO")
+                            input_regs.append(11)
                     case _:
                         print("ERROR")
 
             # Connect edges
-            for i in range(0, 11):
+            num_nodes = 12 if IMM_ENABLE else 11
+            for i in range(0, num_nodes):
                 for jmp_node in nodes_curr_lvl:
                     # if the register is an input and the operation node is the active operation
                     if (i in input_regs):
@@ -563,12 +577,18 @@ def process_lines( f: TextIOWrapper ):
             nodes_curr_lvl.append(RegisterNode(idx, gline_count))
             G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
         
+        # Add 'immediate' node
+        if IMM_ENABLE:
+            nodes_curr_lvl.append(ImmediateValueNode(gline_count))
+            G.add_node(nodes_curr_lvl[-1], level = nodes_curr_lvl[-1].get_level())
+        
         # Add new row to all nodes list
         nodes_all.append(nodes_curr_lvl)
 
         if( opcodes[hex_opcode][2]["output"] == ASM_OPCODE_PARAMS.DST ):
+            num_nodes = 12 if IMM_ENABLE else 11
             for op_node in nodes_all[gline_count-1]:
-                for i in range(0,11):
+                for i in range(0,num_nodes):
                     if (i == hex_reg_dst) and (op_node.get_operation() == opcodes[hex_opcode][3]):
                         # active_edge found
                         G.add_edge(op_node, nodes_all[gline_count][i])
@@ -578,13 +598,15 @@ def process_lines( f: TextIOWrapper ):
                         if ALL_OP_EDGE_ENABLE:
                             carry_edges.append((op_node, nodes_all[gline_count][i]))
         elif( opcodes[hex_opcode][2]["output"] == ASM_OPCODE_PARAMS.JUMP ):
+            num_nodes = 12 if IMM_ENABLE else 11
             for jmp_node in nodes_all[gline_count-1]:
-                for i in range(0,11):
+                for i in range(0,num_nodes):
                     G.add_edge(jmp_node, nodes_all[gline_count][i])
                     if ALL_OP_EDGE_ENABLE:
                         carry_edges.append((jmp_node, nodes_all[gline_count][i]))
         elif( opcodes[hex_opcode][2]["output"] == ASM_OPCODE_PARAMS.EXIT ):
-            for i in range(0,11):
+            num_nodes = 12 if IMM_ENABLE else 11
+            for i in range(0,num_nodes):
                 G.add_edge(nodes_all[gline_count-1][i], nodes_all[gline_count][i])
                 if ALL_OP_EDGE_ENABLE:
                     carry_edges.append((nodes_all[gline_count-1][i], nodes_all[gline_count][i]))
