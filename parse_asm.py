@@ -1,7 +1,7 @@
 '''
 DEFINES
 '''
-IMM_ENABLE = 1
+IMM_ENABLE = 0
 ALL_OP_EDGE_ENABLE = 0
 
 import sys
@@ -205,7 +205,7 @@ opcodes = {0x04: ('add32',    'dstimm',        {'output': ASM_OPCODE_PARAMS.DST,
             0x85: ('call',     'call',         {'output': ASM_OPCODE_PARAMS.JUMP, 'inputs': [ASM_OPCODE_PARAMS.IMM]},                                                       None,     64),
             0x87: ('neg',      'dst',          {'output': ASM_OPCODE_PARAMS.DST, 'inputs': [ASM_OPCODE_PARAMS.DST]},                                                        '~',      64),
             0x94: ('mod32',    'dstimm',       {'output': ASM_OPCODE_PARAMS.DST, 'inputs': [ASM_OPCODE_PARAMS.DST, ASM_OPCODE_PARAMS.IMM]},                                 '%',     32),
-            0x95: ('exit',     'exit',         {'output': ASM_OPCODE_PARAMS.EXIT, 'inputs': None},                                                                                            None,     64),
+            0x95: ('exit',     'exit',         {'output': ASM_OPCODE_PARAMS.EXIT, 'inputs': None},                                                                          None,     64),
             0x97: ('mod',      'dstimm',       {'output': ASM_OPCODE_PARAMS.DST, 'inputs': [ASM_OPCODE_PARAMS.DST, ASM_OPCODE_PARAMS.IMM]},                                 '%',     64),
             0x9c: ('mod32',    'dstsrc',       {'output': ASM_OPCODE_PARAMS.DST, 'inputs': [ASM_OPCODE_PARAMS.DST, ASM_OPCODE_PARAMS.SRC]},                                 '%',     32),
             0x9f: ('mod',      'dstsrc',       {'output': ASM_OPCODE_PARAMS.DST, 'inputs': [ASM_OPCODE_PARAMS.DST, ASM_OPCODE_PARAMS.SRC]},                                 '%',     64),
@@ -306,7 +306,6 @@ def main():
 
     # Iterate the first time to generate list of instruction counts in each basic block
     bb_ln_cnt = pre_process_lines( disasm_file )
-    print( bb_ln_cnt )
     graph_dims_sqr = math.ceil(math.sqrt(len(bb_ln_cnt)))
 
     # Return to top of file
